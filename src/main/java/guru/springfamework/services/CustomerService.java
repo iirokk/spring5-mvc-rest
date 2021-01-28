@@ -37,10 +37,26 @@ public class CustomerService {
     }
 
     public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
-        Customer customer = customerMapper.customerDtoToCustomer(customerDTO);
+        return persistCustomer(customerMapper.customerDtoToCustomer(customerDTO));
+    }
+
+    public CustomerDTO updateOrCreateCustomer(Long id, CustomerDTO customerDTO) {
+        Customer customerToPersist = customerMapper.customerDtoToCustomer(customerDTO);
+        customerToPersist.setId(id);
+        return persistCustomer(customerToPersist);
+    }
+
+    private CustomerDTO persistCustomer(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
-        CustomerDTO returnDto = customerMapper.customerToCustomerDTO(savedCustomer);
-        returnDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
-        return returnDto;
+        CustomerDTO savedCustomerDto = customerMapper.customerToCustomerDTO(savedCustomer);
+        savedCustomerDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
+        return savedCustomerDto;
+    }
+
+    public CustomerDTO patchCustomer(Long id, CustomerDTO customerDTO) {
+        return null;
+    }
+
+    public void deleteCustomerById(Long id) {
     }
 }
