@@ -24,7 +24,7 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    public CategoryDTO getCategoriesByName(String name) {
+    public CategoryDTO getCategoryByName(String name) {
         return categoryMapper.categoryToCategoryDTO(categoryRepository.findByName(name));
     }
 }

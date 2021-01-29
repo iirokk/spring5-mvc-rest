@@ -32,7 +32,7 @@ public class CustomerService {
     public CustomerDTO getCustomerById(Long id) {
         return customerRepository.findById(id)
                 .map(customerMapper::customerToCustomerDTO)
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     public CustomerDTO createNewCustomer(CustomerDTO customerDTO) {
@@ -60,7 +60,7 @@ public class CustomerService {
                 customer.setLastname(customerDTO.getLastname());
             }
             return customerRepository.save(customer);
-        }).orElseThrow(RuntimeException::new);
+        }).orElseThrow(ResourceNotFoundException::new);
         return customerMapper.customerToCustomerDTO(patchedCustomer);
     }
 
