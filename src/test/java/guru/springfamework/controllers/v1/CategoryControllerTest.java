@@ -59,7 +59,7 @@ public class CategoryControllerTest {
     public void testListCategories() throws Exception {
         when(categoryService.getAllCategories()).thenReturn(categoryDTOS);
 
-        mockMvc.perform(get("/api/v1/categories/").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(CategoryController.API_BASE_URL).contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
         .andExpect(jsonPath("$.categories", hasSize(2)));
     }
@@ -68,7 +68,7 @@ public class CategoryControllerTest {
     public void testGetByNameCategories() throws Exception {
         when(categoryService.getCategoriesByName(anyString())).thenReturn(categoryDTOS.get(0));
 
-        mockMvc.perform(get("/api/v1/categories/test1").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(CategoryController.API_BASE_URL + "test1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name", equalTo("test1")));
     }

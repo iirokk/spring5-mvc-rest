@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api/v1/customers/")
+@RequestMapping(CustomerController.API_BASE_URL)
 public class CustomerController {
+
+    public static final String API_BASE_URL = "/api/v1/customers/";
 
     private final CustomerService customerService;
 
