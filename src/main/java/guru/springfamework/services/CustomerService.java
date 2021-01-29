@@ -54,7 +54,16 @@ public class CustomerService {
     }
 
     public CustomerDTO patchCustomer(Long id, CustomerDTO customerDTO) {
-        return null;
+        Customer patchedCustomer = customerRepository.findById(id).map(customer -> {
+            if (customerDTO.getFirstname() != null) {
+                customer.setFirstname(customerDTO.getFirstname());
+            }
+            if (customerDTO.getLastname() != null) {
+                customer.setLastname(customerDTO.getLastname());
+            }
+            return customerRepository.save(customer);
+        }).orElseThrow(RuntimeException::new);
+        return customerMapper.customerToCustomerDTO(patchedCustomer);
     }
 
     public void deleteCustomerById(Long id) {
