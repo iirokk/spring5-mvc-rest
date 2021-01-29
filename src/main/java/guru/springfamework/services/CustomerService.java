@@ -24,7 +24,6 @@ public class CustomerService {
                 .stream()
                 .map(customer -> {
                     CustomerDTO customerDTO = customerMapper.customerToCustomerDTO(customer);
-                    customerDTO.setCustomerUrl("/api/v1/customers/" + customer.getId());
                     return customerDTO;
                 })
                 .collect(Collectors.toList());
@@ -49,7 +48,6 @@ public class CustomerService {
     private CustomerDTO persistCustomer(Customer customer) {
         Customer savedCustomer = customerRepository.save(customer);
         CustomerDTO savedCustomerDto = customerMapper.customerToCustomerDTO(savedCustomer);
-        savedCustomerDto.setCustomerUrl("/api/v1/customer/" + savedCustomer.getId());
         return savedCustomerDto;
     }
 
@@ -63,6 +61,7 @@ public class CustomerService {
             }
             return customerRepository.save(customer);
         }).orElseThrow(RuntimeException::new);
+        CustomerDTO patchedCustomerDto = customerMapper.customerToCustomerDTO(patchedCustomer);
         return customerMapper.customerToCustomerDTO(patchedCustomer);
     }
 

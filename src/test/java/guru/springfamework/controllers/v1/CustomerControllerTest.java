@@ -103,7 +103,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
     @Test
     public void testUpdateCustomer() throws Exception {
-        //given
         CustomerDTO customer = new CustomerDTO();
         customer.setFirstname("Fred");
         customer.setLastname("Flintstone");
@@ -115,7 +114,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
 
         when(customerService.updateOrCreateCustomer(anyLong(), any(CustomerDTO.class))).thenReturn(returnDTO);
 
-        //when/then
         mockMvc.perform(put("/api/v1/customers/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(customer)))
@@ -128,8 +126,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     @Test
     @Ignore
     public void testPatchCustomer() throws Exception {
-
-        //given
         CustomerDTO customer = new CustomerDTO();
         customer.setFirstname("Fred");
 
@@ -152,7 +148,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     @Test
     @Ignore
     public void testDeleteCustomer() throws Exception {
-
         mockMvc.perform(delete("/api/v1/customers/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());

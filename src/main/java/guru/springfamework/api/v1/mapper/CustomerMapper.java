@@ -10,7 +10,14 @@ public interface CustomerMapper {
 
     CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-    CustomerDTO customerToCustomerDTO(Customer customer);
+    default CustomerDTO customerToCustomerDTO(Customer customer) {
+        CustomerDTO customerDTO = new CustomerDTO();
+        customerDTO.setId(customer.getId());
+        customerDTO.setFirstname(customer.getFirstname());
+        customerDTO.setLastname(customer.getLastname());
+        customerDTO.setCustomerUrl("/api/v1/customer/" + customer.getId());
+        return customerDTO;
+    };
 
     Customer customerDtoToCustomer(CustomerDTO customerDTO);
 }
