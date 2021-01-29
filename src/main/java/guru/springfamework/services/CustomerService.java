@@ -61,10 +61,10 @@ public class CustomerService {
             }
             return customerRepository.save(customer);
         }).orElseThrow(RuntimeException::new);
-        CustomerDTO patchedCustomerDto = customerMapper.customerToCustomerDTO(patchedCustomer);
         return customerMapper.customerToCustomerDTO(patchedCustomer);
     }
 
     public void deleteCustomerById(Long id) {
+        customerRepository.deleteById(id);
     }
 }

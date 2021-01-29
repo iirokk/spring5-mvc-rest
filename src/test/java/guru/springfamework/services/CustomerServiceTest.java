@@ -97,7 +97,6 @@ public class CustomerServiceTest {
     }
 
     @Test
-    @Ignore
     public void deleteCustomerById() throws Exception {
         customerService.deleteCustomerById(1L);
         verify(customerRepository, times(1)).deleteById(anyLong());

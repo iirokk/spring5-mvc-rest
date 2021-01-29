@@ -124,7 +124,6 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     }
 
     @Test
-    @Ignore
     public void testPatchCustomer() throws Exception {
         CustomerDTO customer = new CustomerDTO();
         customer.setFirstname("Fred");
@@ -146,12 +145,10 @@ public class CustomerControllerTest extends AbstractRestControllerTest {
     }
 
     @Test
-    @Ignore
     public void testDeleteCustomer() throws Exception {
         mockMvc.perform(delete("/api/v1/customers/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
-
         verify(customerService).deleteCustomerById(anyLong());
     }
 }
